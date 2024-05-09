@@ -6,7 +6,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
   instances                       = var.vmss.instances
   admin_username                  = try(var.vmss.admin_username, "azureadmin")
   admin_password                  = var.admin_password
-  computer_name_prefix            = try(var.vmss.computer_name_prefix, null) # Optional. eg: "vmsswin-"
+  computer_name_prefix            = try(var.vmss.computer_name_prefix, "vmsswin-") # Optional. eg: "devopsw-"
 
   overprovision          = var.vmss.overprovision
   single_placement_group = var.vmss.single_placement_group
