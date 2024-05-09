@@ -36,6 +36,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
       name      = "ipconfig1"
       primary   = true
       subnet_id = var.subnets[var.vmss.subnet_name].id
+      load_balancer_backend_address_pool_ids = try(var.vmss.lb, null) != null ? [azurerm_lb_backend_address_pool.loadbalancer-lbbp[0].id] : null
     }
   }
 
