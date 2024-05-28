@@ -8,7 +8,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
   admin_password       = var.admin_password
   computer_name_prefix = try(var.vmss.computer_name_prefix, "vmsswin-") # Optional. eg: "devopsw-"
   custom_data          = var.custom_data
-  upgrade_mode = "Automatic"
+  # upgrade_mode = "Automatic"
 
   overprovision          = var.vmss.overprovision
   single_placement_group = var.vmss.single_placement_group
@@ -20,10 +20,10 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
     version   = var.vmss.source_image_reference.version
   }
 
-  automatic_os_upgrade_policy {
-          disable_automatic_rollback  = true
-          enable_automatic_os_upgrade =  true
-        }
+  # automatic_os_upgrade_policy {
+  #         disable_automatic_rollback  = true
+  #         enable_automatic_os_upgrade =  true
+  #       }
 
   os_disk {
     storage_account_type = var.vmss.os_disk.storage_account_type
