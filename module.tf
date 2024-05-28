@@ -1,12 +1,14 @@
 resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
-  name                            = "${local.vmss_name}-vmss"
-  location                        = var.location
-  resource_group_name             = var.resource_groups[var.vmss.resource_group_name].name
-  sku                             = var.vmss.sku
-  instances                       = var.vmss.instances
-  admin_username                  = try(var.vmss.admin_username, "azureadmin")
-  admin_password                  = var.admin_password
-  computer_name_prefix            = try(var.vmss.computer_name_prefix, "vmsswin-") # Optional. eg: "devopsw-"
+  name                 = "${local.vmss_name}-vmss"
+  location             = var.location
+  resource_group_name  = var.resource_groups[var.vmss.resource_group_name].name
+  sku                  = var.vmss.sku
+  instances            = var.vmss.instances
+  admin_username       = try(var.vmss.admin_username, "azureadmin")
+  admin_password       = var.admin_password
+  computer_name_prefix = try(var.vmss.computer_name_prefix, "vmsswin-") # Optional. eg: "devopsw-"
+  custom_data          = var.custom_data
+  # upgrade_mode = "Automatic"
 
   overprovision          = var.vmss.overprovision
   single_placement_group = var.vmss.single_placement_group
@@ -19,8 +21,8 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
   }
 
   # automatic_os_upgrade_policy {
-  #         disable_automatic_rollback  = null
-  #         enable_automatic_os_upgrade =  null
+  #         disable_automatic_rollback  = true
+  #         enable_automatic_os_upgrade =  true
   #       }
 
   os_disk {
@@ -33,9 +35,9 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
     primary = true
 
     ip_configuration {
-      name      = "ipconfig1"
-      primary   = true
-      subnet_id = var.subnets[var.vmss.subnet_name].id
+      name                                   = "ipconfig1"
+      primary                                = true
+      subnet_id                              = var.subnets[var.vmss.subnet_name].id
       load_balancer_backend_address_pool_ids = try(var.vmss.lb, null) != null ? [azurerm_lb_backend_address_pool.loadbalancer-lbbp[0].id] : null
     }
   }

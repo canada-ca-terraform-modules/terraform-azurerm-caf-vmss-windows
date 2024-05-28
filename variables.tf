@@ -1,18 +1,15 @@
 variable "tags" {
-  type = any
+  description = "Tags that will be associated with the ressource"
+  type = map(string)
 }
 
 variable "env" {
-  type = string
-}
-variable "group" {
-  type = string
-}
-variable "project" {
+  description = "4 characters defining the environment name prefix for the scale set"
   type = string
 }
 
 variable "location" {
+  description = "Azure location in which the scale set is deployed"
   type = string
 }
 
@@ -33,5 +30,6 @@ variable "subnets" {
 }
 
 variable "admin_password" {
+  description = "The password for the local administrator account on the virtual machine"
   type = string
 }
