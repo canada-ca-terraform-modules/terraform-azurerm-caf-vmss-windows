@@ -25,6 +25,14 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss_windows" {
   #         enable_automatic_os_upgrade =  true
   #       }
 
+  dynamic "scale_in" {
+    for_each = try(var.vmss.scale_in, false) != false ? [1] : []
+    content {
+      rule                   = try(scale_in.value.rule, null)
+      force_deletion_enabled = try(scale_in.value.force_deletion_enabled, null)
+    }
+  }
+
   os_disk {
     storage_account_type = var.vmss.os_disk.storage_account_type
     caching              = var.vmss.os_disk.caching
