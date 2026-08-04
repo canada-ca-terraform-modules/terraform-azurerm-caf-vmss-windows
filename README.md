@@ -120,7 +120,7 @@ GitHub Actions workflow at [.github/workflows/terraform-ci.yml](.github/workflow
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 5.0.1 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 5.0 |
 
 ## Modules
 
