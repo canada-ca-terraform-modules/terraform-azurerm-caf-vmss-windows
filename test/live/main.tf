@@ -1,5 +1,8 @@
 # No-op touch: satisfies live-test.yml's pull_request path filter (test/live/**)
-# for the workflow-only PR that adds this file to CI.
+# for the workflow-only PR that adds this file to CI. Re-touched to
+# re-trigger a fresh live-test run after the Gen2-image fixture fix landed
+# on main (PR #5) - merging that fix was a push event, not a pull_request
+# event, so it didn't auto-trigger live-test on its own.
 terraform {
   required_version = ">= 1.9"
   required_providers {
