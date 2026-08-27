@@ -1,3 +1,5 @@
+# No-op touch: satisfies live-test.yml's pull_request path filter (test/live/**)
+# for the workflow-only PR that adds this file to CI.
 terraform {
   required_version = ">= 1.9"
   required_providers {
