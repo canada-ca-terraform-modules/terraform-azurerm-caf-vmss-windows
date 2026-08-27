@@ -30,8 +30,12 @@ vmss = {
   source_image_reference = {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2022-Datacenter"
-    version   = "latest"
+    # -g2 (Gen2) image SKU: required to boot Dav6-family VM sizes
+    # (Standard_D2as_v6 et al. are Gen2-only; the non-suffixed
+    # "2022-Datacenter" SKU is Gen1 and 400s with "cannot boot Hypervisor
+    # Generation '1'" against this family).
+    sku     = "2022-datacenter-g2"
+    version = "latest"
   }
 
   os_disk = {
